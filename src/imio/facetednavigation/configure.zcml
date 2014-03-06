@@ -5,8 +5,12 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="imio.facetednavigation">
 
+  <include package="eea.facetednavigation" file="meta.zcml" />
+  <include package="eea.facetednavigation" />
+  <include package=".widgets.collection" />
 
-  <includeDependencies package="." />
+  <adapter factory=".criteria.CollectionCriteria"
+           for=".interfaces.ICollectionFacetApplied" />
 
   <genericsetup:registerProfile
       name="default"
@@ -15,6 +19,5 @@
       description="Installs the imio.facetednavigation package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
 
 </configure>
