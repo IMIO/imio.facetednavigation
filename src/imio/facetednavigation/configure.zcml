@@ -7,10 +7,6 @@
 
   <include package="eea.facetednavigation" file="meta.zcml" />
   <include package="eea.facetednavigation" />
-  <include package=".widgets.collection" />
-
-  <adapter factory=".criteria.CollectionCriteria"
-           for=".interfaces.ICollectionFacetApplied" />
 
   <genericsetup:registerProfile
       name="default"
@@ -19,5 +15,18 @@
       description="Installs the imio.facetednavigation package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+  <permission
+    id="imio.faceted.configure"
+    title="imio.facetednavigation: Configure faceted"
+    description=""
+    />
+
+  <include package=".subtypes" />
+  <include package=".portlets" />
+  <include package=".widgets.collection" />
+
+  <adapter factory=".criteria.CollectionCriteria"
+           for=".interfaces.ICollectionFacetApplied" />
 
 </configure>

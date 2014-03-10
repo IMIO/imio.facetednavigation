@@ -4,7 +4,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:faceted="http://namespaces.zope.org/faceted"
     i18n_domain="imio.facetednavigation">
-  
+
   <faceted:widget factory=".widget.Widget" />
 
 </configure>

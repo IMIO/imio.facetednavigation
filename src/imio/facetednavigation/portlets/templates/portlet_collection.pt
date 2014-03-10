@@ -1,0 +1,17 @@
+<div id="c0_widget" class="faceted-widget faceted-radio-widget">
+<form method="get" action=".">
+  <ul>
+    <li>
+      <input id="c0_Plone" class="faceted-noborder" type="radio" value="Plone" name="c0" checked="checked">
+      <label for="c0_Plone" title="Plone">Plone</label>
+    </li>
+    <li>
+      <input id="c0_Doc" class="faceted-noborder" type="radio" value="Doc" name="c0" checked="checked">
+      <label for="c0_Doc" title="Doc">Doc</label>
+    </li>
+  </ul>
+  <ul tal:repeat="collection view/collections">
+
+  </ul>
+</form>
+</div>

@@ -12,7 +12,8 @@ class Widget(AbstractWidget):
     index = empty
 
     def query(self, form):
-        """ Get value from form and return a catalog dict query
-        """
-        query = {'SearchableText': 'Plone'}
+        """ Get value from form and return a catalog dict query """
+        searchable_text = form.get(self.data.__name__, '')
+        query = {'portal_type': 'Document',
+                 'SearchableText': searchable_text}
         return query
