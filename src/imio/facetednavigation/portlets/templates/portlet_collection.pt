@@ -10,8 +10,5 @@
       <label for="c0_Doc" title="Doc">Doc</label>
     </li>
   </ul>
-  <ul tal:repeat="collection view/collections">
-
-  </ul>
 </form>
 </div>
