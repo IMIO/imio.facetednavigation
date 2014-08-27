@@ -48,6 +48,6 @@ class CollectionCriteria(ImioCriteria):
         objects.append(Criterion(widget='collection', position=0,
                                  section='default'))
         objects.append(Criterion(widget='resultsperpage', position=1,
-                                 section='default', default=5,
+                                 section='default', default=10,
                                  hidden=True))
         return objects
