@@ -38,8 +38,10 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'setuptools',
         'eea.facetednavigation',
+        'five.grok',
+        'setuptools',
+        'z3c.table',
     ],
     extras_require={'test': ['plone.app.testing[robot]>=4.2.2']},
     entry_points="""

@@ -2,11 +2,13 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="imio.facetednavigation">
 
   <include package="eea.facetednavigation" file="meta.zcml" />
   <include package="eea.facetednavigation" />
+  <include package="five.grok" />
 
   <genericsetup:registerProfile
       name="default"
@@ -25,6 +27,7 @@
   <include package=".subtypes" />
   <include package=".portlets" />
   <include package=".widgets.collection" />
+  <include package=".views" />
 
   <adapter factory=".criteria.CollectionCriteria"
            for=".interfaces.ICollectionFacetApplied" />

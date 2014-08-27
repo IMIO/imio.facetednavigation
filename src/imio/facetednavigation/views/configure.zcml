@@ -1,0 +1,25 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:faceted="http://namespaces.zope.org/faceted"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:grok="http://namespaces.zope.org/grok"
+  i18n_domain="imio.facetednavigation">
+
+  <faceted:view
+    name="faceted-table-items"
+    template="table-items.pt"
+    for="*"
+    title="Faceted table items"
+    permission="zope2.View"
+    />
+
+  <browser:view
+    name="faceted-table-view"
+    for="*"
+    class=".preview.FacetedTableView"
+    permission="zope2.View"
+    />
+
+  <grok:grok package=".preview" />
+
+</configure>
