@@ -32,6 +32,12 @@
   <adapter factory=".criteria.CollectionCriteria"
            for=".interfaces.ICollectionFacetApplied" />
 
+  <utility component=".vocabulary.TestVocabularyFactory"
+           name="imio.facetednavigation.testvocabulary" />
+
+  <utility component=".vocabulary.TestSecondVocabularyFactory"
+           name="imio.facetednavigation.testsecondvocabulary" />
+
   <subscriber
     for="imio.facetednavigation.interfaces.ICollectionFacetApplied
          eea.facetednavigation.interfaces.IFacetedEnabledEvent"
