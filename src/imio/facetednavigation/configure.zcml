@@ -27,6 +27,7 @@
   <include package=".subtypes" />
   <include package=".portlets" />
   <include package=".widgets.collection" />
+  <include package=".widgets.test" />
   <include package=".views" />
 
   <adapter factory=".criteria.CollectionCriteria"
