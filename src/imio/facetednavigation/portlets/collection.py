@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 from zope.formlib import form
 from zope.interface import implements
 
@@ -6,6 +7,7 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from eea.facetednavigation.criteria.interfaces import ICriteria
 
 from imio.facetednavigation import ImioFacetedMessageFactory as _
 from imio.facetednavigation.interfaces import ICollectionFacetApplied
@@ -38,6 +40,17 @@ class Renderer(base.Renderer):
     @property
     def collections(self):
         pass
+
+    @property
+    def widget_render(self):
+        criteria = ICriteria(self.context)
+        widgets = []
+        for criterion in criteria.values():
+            if criterion.widget != 'collection':
+                continue
+            widget_cls = criteria.widget(wid=criterion.widget)
+            widgets.append(widget_cls(self.context, self.request, criterion))
+        return ''.join([w() for w in widgets])
 
 
 class AddForm(base.AddForm):
