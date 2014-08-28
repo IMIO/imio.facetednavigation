@@ -22,4 +22,12 @@
 
   <grok:grok package=".preview" />
 
+
+  <browser:page
+    for="eea.facetednavigation.interfaces.IFacetedNavigable"
+    name="default_collection_widgets.xml"
+    template="default_collection.xml"
+    permission="eea.faceted.configure"
+    />
+
 </configure>

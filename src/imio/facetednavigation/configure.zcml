@@ -32,4 +32,10 @@
   <adapter factory=".criteria.CollectionCriteria"
            for=".interfaces.ICollectionFacetApplied" />
 
+  <subscriber
+    for="imio.facetednavigation.interfaces.ICollectionFacetApplied
+         eea.facetednavigation.interfaces.IFacetedEnabledEvent"
+    handler=".events.collection_faceted_enabled"
+    />
+
 </configure>
