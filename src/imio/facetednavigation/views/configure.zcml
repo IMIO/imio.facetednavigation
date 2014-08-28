@@ -8,14 +8,14 @@
   <faceted:view
     name="faceted-table-items"
     template="table-items.pt"
-    for="*"
+    for="eea.facetednavigation.interfaces.IFacetedNavigable"
     title="Faceted table items"
     permission="zope2.View"
     />
 
   <browser:view
     name="faceted-table-view"
-    for="*"
+    for="eea.facetednavigation.interfaces.IFacetedNavigable"
     class=".preview.FacetedTableView"
     permission="zope2.View"
     />
