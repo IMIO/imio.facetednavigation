@@ -95,7 +95,8 @@ class BaseColumnHeader(SortingColumnHeader, grok.MultiAdapter):
     def query_string(self):
         query = self.request_query
 
-        if query.get('c0', '') == self.column.sort_index and \
+        if (query.get('c0', '') == self.column.sort_index or
+            self.table.sortOn == self.column.id) and \
            query.get('reversed', 'off') == 'off':
             query.update({'reversed': 'on'})
         elif 'reversed' in query:
