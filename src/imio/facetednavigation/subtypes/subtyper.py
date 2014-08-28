@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
 from zope.event import notify
@@ -7,7 +9,6 @@ from eea.facetednavigation.events import FacetedWillBeEnabledEvent
 from eea.facetednavigation.events import FacetedDisabledEvent
 from eea.facetednavigation.events import FacetedEnabledEvent
 from eea.facetednavigation.interfaces import IDisableSmartFacets
-#from eea.facetednavigation.interfaces import IHidePloneLeftColumn
 from eea.facetednavigation.interfaces import IHidePloneRightColumn
 from eea.facetednavigation.subtypes.subtyper import FacetedSubtyper
 
