@@ -39,6 +39,9 @@
   <utility component=".vocabulary.TestSecondVocabularyFactory"
            name="imio.facetednavigation.testsecondvocabulary" />
 
+  <utility component=".vocabulary.CollectionVocabularyFactory"
+           name="imio.facetednavigation.collectionvocabulary" />
+
   <subscriber
     for="imio.facetednavigation.interfaces.ICollectionFacetApplied
          eea.facetednavigation.interfaces.IFacetedEnabledEvent"

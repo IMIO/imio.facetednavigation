@@ -2,6 +2,7 @@
 
 from Products.CMFPlone.utils import safe_unicode
 from binascii import b2a_qp
+from plone import api
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
@@ -50,3 +51,27 @@ class TestSecondVocabulary(object):
 
 
 TestSecondVocabularyFactory = TestSecondVocabulary()
+
+
+class CollectionVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context, query=None):
+        self.context = context
+
+        results = [(b.Title, b.UID) for b in self.brains]
+        items = [
+            SimpleTerm(uid, uid, safe_unicode(title))
+            for title, uid in results
+            if query is None or safe_encode(query) in safe_encode(title)
+        ]
+
+        return SimpleVocabulary(items)
+
+    @property
+    def brains(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        return catalog({'portal_type': 'Collection'})
+
+
+CollectionVocabularyFactory = CollectionVocabulary()
