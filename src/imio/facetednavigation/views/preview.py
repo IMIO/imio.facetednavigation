@@ -43,7 +43,8 @@ class FacetedTable(SequenceTable):
     def update_sortOn(self):
         sort_on = self.request.form.get('c0[]', '')
         for c in self.columns:
-            if c.sort_index == sort_on:
+            key = c.sort_index or c.attrName
+            if key == sort_on:
                 return c.id
         return self.columns[0].id
 
@@ -67,10 +68,10 @@ class BaseColumn(column.GetAttrColumn):
     sort_index = None
 
     def getSortKey(self, item):
-        from Products.CMFPlone.CatalogTool import sortable_title
-        if self.sort_index:
-            return sortable_title(item)()
-        return self.renderCell(item)
+        attr = self.sort_index or self.attrName
+        if attr is None:
+            raise ValueError('sort_index or attrName must be defined')
+        return getattr(item, attr)
 
     def renderCell(self, item):
         return getattr(item, self.attrName.decode('utf8'))
@@ -81,11 +82,15 @@ class BaseColumnHeader(SortingColumnHeader, grok.MultiAdapter):
     grok.provides(IColumnHeader)
 
     def render(self):
-        if self.column.sort_index:
+        if self.column.sort_index or self.column.attrName:
             html = u'<a href="{0}#{1}" title="Sort">{2} {3}</a>'
             return html.format(self.faceted_url, self.query_string,
                                self.column.header, self.order_arrow)
         return self.column.header
+
+    @property
+    def sort_on(self):
+        return self.column.sort_index or self.column.attrName
 
     @property
     def faceted_url(self):
@@ -95,14 +100,15 @@ class BaseColumnHeader(SortingColumnHeader, grok.MultiAdapter):
     def query_string(self):
         query = self.request_query
 
-        if (query.get('c0', '') == self.column.sort_index or
+        if (query.get('c0', '') == self.sort_on or
             self.table.sortOn == self.column.id) and \
            query.get('reversed', 'off') == 'off':
             query.update({'reversed': 'on'})
         elif 'reversed' in query:
             del query['reversed']
-        query.update({'c0': self.column.sort_index})
-        del query['version']
+        query.update({'c0': self.sort_on})
+        if 'version' in query:
+            del query['version']
         return make_query(query)
 
     @property
@@ -113,7 +119,7 @@ class BaseColumnHeader(SortingColumnHeader, grok.MultiAdapter):
     @property
     def order_arrow(self):
         query = self.request_query
-        if query.get('c0', '') == self.column.sort_index or \
+        if query.get('c0', '') == self.sort_on or \
            self.table.sortOn == self.column.id:
             order = query.get('reversed')
             if order == 'on':
@@ -132,6 +138,10 @@ class TitleColumn(BaseColumn, grok.MultiAdapter):
     weight = 0
     sort_index = 'sortable_title'
 
+    def getSortKey(self, item):
+        from Products.CMFPlone.CatalogTool import sortable_title
+        return sortable_title(item)()
+
     def renderCell(self, item):
         return u'<a href="{0}">{1}</a>'.format(item.getURL(),
                                                item.Title.decode('utf8'))
@@ -145,7 +155,6 @@ class AuthorColumn(BaseColumn, grok.MultiAdapter):
     header = u'Auteur'
     attrName = 'Creator'
     weight = 10
-    sort_index = 'Creator'
 
 
 class StateColumn(BaseColumn, grok.MultiAdapter):
@@ -156,4 +165,3 @@ class StateColumn(BaseColumn, grok.MultiAdapter):
     header = u'Etat'
     attrName = 'review_state'
     weight = 20
-    sort_index = 'review_state'
