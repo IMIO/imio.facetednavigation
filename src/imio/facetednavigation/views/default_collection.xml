@@ -22,7 +22,7 @@
    <property name="default">10</property>
   </criterion>
   <criterion name="c2">
-   <property name="widget">collection</property>
+   <property name="widget">test</property>
    <property name="title">Test 1</property>
    <property name="position"></property>
    <property name="section">default</property>
@@ -40,7 +40,7 @@
    </property>
   </criterion>
   <criterion name="c3">
-   <property name="widget">collection</property>
+   <property name="widget">test</property>
    <property name="title">Test 2</property>
    <property name="position"></property>
    <property name="section">default</property>
@@ -48,6 +48,24 @@
    <property name="index">Title</property>
    <property
       name="vocabulary">imio.facetednavigation.testsecondvocabulary</property>
+   <property name="catalog"></property>
+   <property name="maxitems">5</property>
+   <property name="sortreversed">1</property>
+   <property name="count">1</property>
+   <property name="hidezerocount">1</property>
+   <property name="hidealloption">0</property>
+   <property name="default">
+   </property>
+  </criterion>
+  <criterion name="c4">
+   <property name="widget">collection</property>
+   <property name="title">Collection</property>
+   <property name="position"></property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="index">UID</property>
+   <property
+      name="vocabulary">imio.facetednavigation.collectionvocabulary</property>
    <property name="catalog"></property>
    <property name="maxitems">5</property>
    <property name="sortreversed">1</property>

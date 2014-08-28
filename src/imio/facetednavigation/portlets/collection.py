@@ -46,7 +46,7 @@ class Renderer(base.Renderer):
         criteria = ICriteria(self.context)
         widgets = []
         for criterion in criteria.values():
-            if criterion.widget != 'collection':
+            if criterion.widget not in ('collection', 'test'):
                 continue
             widget_cls = criteria.widget(wid=criterion.widget)
             widgets.append(widget_cls(self.context, self.request, criterion))
