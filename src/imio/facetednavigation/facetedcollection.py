@@ -28,10 +28,11 @@ FacetedCollectionSchema = CollectionSchema.copy() + atapi.Schema((
         name='collectioncategory',
         required=False,
         mode='rw',
-        vocabulary_factory='imio.facetednavigation.collectioncategoryvocabulary',
+        vocabulary_factory='imio.facetednavigation.facetedcollectioncategoryvocabulary',
         widget=atapi.SelectionWidget(
             label=_(u'Category'),
             description=u'',
+            format='select',
         ),
     ),
 

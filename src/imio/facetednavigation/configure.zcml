@@ -29,23 +29,18 @@
   <include package=".subtypes" />
   <include package=".portlets" />
   <include package=".widgets.collection" />
-  <include package=".widgets.test" />
   <include package=".views" />
 
   <adapter factory=".criteria.CollectionCriteria"
            for=".interfaces.ICollectionFacetApplied" />
 
-  <utility component=".vocabulary.TestVocabularyFactory"
-           name="imio.facetednavigation.testvocabulary" />
-
-  <utility component=".vocabulary.TestSecondVocabularyFactory"
-           name="imio.facetednavigation.testsecondvocabulary" />
-
-  <utility component=".vocabulary.CollectionVocabularyFactory"
-           name="imio.facetednavigation.collectionvocabulary" />
+  <!-- Vocabularies -->
 
   <utility component=".vocabulary.FacetedCollectionVocabularyFactory"
-           name="imio.facetednavigation.collectioncategoryvocabulary" />
+           name="imio.facetednavigation.facetedcollectionvocabulary" />
+
+  <utility component=".vocabulary.FacetedCollectionCategoryVocabularyFactory"
+           name="imio.facetednavigation.facetedcollectioncategoryvocabulary" />
 
   <subscriber
     for="imio.facetednavigation.interfaces.ICollectionFacetApplied

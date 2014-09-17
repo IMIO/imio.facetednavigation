@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 from Products.CMFPlone.utils import safe_unicode
-from binascii import b2a_qp
 from plone import api
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
@@ -17,43 +16,7 @@ def safe_encode(term):
     return term
 
 
-class TestVocabulary(object):
-    implements(IVocabularyFactory)
-
-    def __call__(self, context, query=None):
-        self.context = context
-        elements = ('Plone', 'Doc', 'Bienvenue')
-        items = [
-            SimpleTerm(e, b2a_qp(safe_encode(e)), safe_unicode(e))
-            for e in elements
-            if query is None or safe_encode(query) in safe_encode(e)
-        ]
-
-        return SimpleVocabulary(items)
-
-
-TestVocabularyFactory = TestVocabulary()
-
-
-class TestSecondVocabulary(object):
-    implements(IVocabularyFactory)
-
-    def __call__(self, context, query=None):
-        self.context = context
-        elements = ('Plone', '1')
-        items = [
-            SimpleTerm(e, b2a_qp(safe_encode(e)), safe_unicode(e))
-            for e in elements
-            if query is None or safe_encode(query) in safe_encode(e)
-        ]
-
-        return SimpleVocabulary(items)
-
-
-TestSecondVocabularyFactory = TestSecondVocabulary()
-
-
-class CollectionVocabulary(object):
+class FacetedCollectionVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context, query=None):
@@ -72,17 +35,21 @@ class CollectionVocabulary(object):
     @property
     def brains(self):
         catalog = api.portal.get_tool('portal_catalog')
-        return catalog({'portal_type': 'Collection'})
-
-
-CollectionVocabularyFactory = CollectionVocabulary()
-
-
-class FacetedCollectionVocabulary(object):
-    implements(IVocabularyFactory)
-
-    def __call__(self, context, query=None):
-        return SimpleVocabulary([])
+        return catalog({'portal_type': 'FacetedCollection'})
 
 
 FacetedCollectionVocabularyFactory = FacetedCollectionVocabulary()
+
+
+class FacetedCollectionCategoryVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context, query=None):
+        items = [
+            SimpleTerm('category1', 'category1', 'Category 1'),
+            SimpleTerm('category2', 'category2', 'Category 2'),
+        ]
+        return SimpleVocabulary(items)
+
+
+FacetedCollectionCategoryVocabularyFactory = FacetedCollectionCategoryVocabulary()
