@@ -9,8 +9,8 @@ from zope.component import queryMultiAdapter
 
 class Widget(RadioWidget):
 
-    widget_type = 'collection'
-    widget_label = 'Collection'
+    widget_type = 'facetedcollection'
+    widget_label = 'FacetedCollection'
 
     def query(self, form):
         """ Get value from form and return a catalog dict query """

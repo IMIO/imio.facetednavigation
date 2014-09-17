@@ -22,7 +22,7 @@
    <property name="default">10</property>
   </criterion>
   <criterion name="c2">
-   <property name="widget">collection</property>
+   <property name="widget">facetedcollection</property>
    <property name="title">Collection</property>
    <property name="position"></property>
    <property name="section">default</property>
