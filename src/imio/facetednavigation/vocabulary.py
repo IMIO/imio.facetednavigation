@@ -76,3 +76,13 @@ class CollectionVocabulary(object):
 
 
 CollectionVocabularyFactory = CollectionVocabulary()
+
+
+class FacetedCollectionVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context, query=None):
+        return SimpleVocabulary([])
+
+
+FacetedCollectionVocabularyFactory = FacetedCollectionVocabulary()

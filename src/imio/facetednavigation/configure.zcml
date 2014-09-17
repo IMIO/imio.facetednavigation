@@ -6,6 +6,8 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="imio.facetednavigation">
 
+  <five:registerPackage package="." initialize=".initialize" />
+
   <include package="eea.facetednavigation" file="meta.zcml" />
   <include package="eea.facetednavigation" />
   <include package="five.grok" />
@@ -42,10 +44,18 @@
   <utility component=".vocabulary.CollectionVocabularyFactory"
            name="imio.facetednavigation.collectionvocabulary" />
 
+  <utility component=".vocabulary.FacetedCollectionVocabularyFactory"
+           name="imio.facetednavigation.collectioncategoryvocabulary" />
+
   <subscriber
     for="imio.facetednavigation.interfaces.ICollectionFacetApplied
          eea.facetednavigation.interfaces.IFacetedEnabledEvent"
     handler=".events.collection_faceted_enabled"
     />
+
+  <class class=".facetedcollection.FacetedCollection">
+    <require permission="zope2.View"
+             interface=".facetedcollection.IFacetedCollection" />
+  </class>
 
 </configure>
