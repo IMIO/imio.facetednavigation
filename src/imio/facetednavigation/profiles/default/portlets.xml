@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
-  <assignment name="portlet_faceted_collection" category="context" key="/"
-              manager="plone.leftcolumn" type="imio.facetednavigation.portlets.collection" >
+  <assignment name="portlet_facetedcollection" category="context" key="/"
+              manager="plone.leftcolumn" type="imio.facetednavigation.portlets.facetedcollection" >
     <property name="macro">portlet</property>
-    <property name="template">portlet_collection</property>
+    <property name="template">portlet_facetedcollection</property>
   </assignment>
 </portlets>

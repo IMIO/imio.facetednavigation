@@ -7,13 +7,13 @@
     i18n_domain="imio.facetednavigation">
 
   <plone:portlet
-    name="imio.facetednavigation.portlets.collection"
-    interface=".collection.IFacetedCollectionPortlet"
+    name="imio.facetednavigation.portlets.facetedcollection"
+    interface=".facetedcollection.IFacetedCollectionPortlet"
     view_permission="zope2.View"
     edit_permission="cmf.ManagePortal"
-    assignment=".collection.Assignment"
-    renderer=".collection.Renderer"
-    addview=".collection.AddForm"
-    editview=".collection.EditForm"/>
+    assignment=".facetedcollection.Assignment"
+    renderer=".facetedcollection.Renderer"
+    addview=".facetedcollection.AddForm"
+    editview=".facetedcollection.EditForm"/>
 
 </configure>

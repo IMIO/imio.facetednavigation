@@ -31,7 +31,7 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     def render(self):
-        return ViewPageTemplateFile('templates/portlet_collection.pt')(self)
+        return ViewPageTemplateFile('templates/portlet_facetedcollection.pt')(self)
 
     @property
     def available(self):
@@ -46,7 +46,7 @@ class Renderer(base.Renderer):
         criteria = ICriteria(self.context)
         widgets = []
         for criterion in criteria.values():
-            if criterion.widget not in ('collection', 'test'):
+            if criterion.widget not in ('facetedcollection', ):
                 continue
             widget_cls = criteria.widget(wid=criterion.widget)
             widgets.append(widget_cls(self.context, self.request, criterion))
