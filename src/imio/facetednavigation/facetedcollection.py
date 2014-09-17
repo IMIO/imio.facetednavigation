@@ -15,12 +15,23 @@ class IFacetedCollection(ICollection):
 FacetedCollectionSchema = CollectionSchema.copy() + atapi.Schema((
 
     atapi.StringField(
-        name='category',
+        name='talcondition',
+        required=False,
+        mode='rw',
+        widget=atapi.StringWidget(
+            label=_(u'TAL condition'),
+            description=_(u'TAL expression for the display of the collection'),
+        ),
+    ),
+
+    atapi.StringField(
+        name='collectioncategory',
         required=False,
         mode='rw',
         vocabulary_factory='imio.facetednavigation.collectioncategoryvocabulary',
         widget=atapi.SelectionWidget(
-            label=_(u'category'),
+            label=_(u'Category'),
+            description=u'',
         ),
     ),
 
