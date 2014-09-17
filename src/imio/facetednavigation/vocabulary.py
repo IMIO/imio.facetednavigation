@@ -65,6 +65,7 @@ class CollectionVocabulary(object):
             for title, uid in results
             if query is None or safe_encode(query) in safe_encode(title)
         ]
+        sorted(items)
 
         return SimpleVocabulary(items)
 
