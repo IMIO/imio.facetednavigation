@@ -3,6 +3,8 @@
 from Products.CMFCore.utils import getToolByName
 from eea.facetednavigation.widgets.radio.widget import Widget as RadioWidget
 from plone.app.querystring import queryparser
+from imio.facetednavigation.interfaces import IWidgetDefaultValue
+from zope.component import queryMultiAdapter
 
 
 class Widget(RadioWidget):
@@ -42,9 +44,18 @@ class Widget(RadioWidget):
     def default(self):
         """Return the default value"""
         default = super(Widget, self).default
+        if not default:
+            default = self.adapter_default_value
         if not default and self.hidealloption is True:
             default = self.default_term_value
         return default
+
+    @property
+    def adapter_default_value(self):
+        adapter = queryMultiAdapter((self.context, self.request, self),
+                                    IWidgetDefaultValue)
+        if adapter:
+            return adapter.value
 
     @property
     def default_term_value(self):
