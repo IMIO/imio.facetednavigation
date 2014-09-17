@@ -1,8 +1,8 @@
 # encoding: utf-8
 
+from Products.CMFCore.utils import getToolByName
 from eea.facetednavigation.widgets.radio.widget import Widget as RadioWidget
 from plone.app.querystring import queryparser
-from Products.CMFCore.utils import getToolByName
 
 
 class Widget(RadioWidget):
@@ -37,3 +37,26 @@ class Widget(RadioWidget):
                 continue
             res[value] = len(ctool(self.query(form={self.data.__name__: value})))
         return res
+
+    @property
+    def default(self):
+        """Return the default value"""
+        default = super(Widget, self).default
+        if not default and self.hidealloption is True:
+            default = self.default_term_value
+        return default
+
+    @property
+    def default_term_value(self):
+        idx = self.sortreversed and -1 or 0
+        terms = self.portal_vocabulary()
+        if len(terms) > 0:
+            return terms[idx][0]
+
+    @property
+    def sortreversed(self):
+        return bool(int(getattr(self.data, 'sortreversed', u'0') or u'0'))
+
+    @property
+    def hidealloption(self):
+        return bool(int(getattr(self.data, 'hidealloption', u'0') or u'0'))
