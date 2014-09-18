@@ -1,18 +1,9 @@
 # encoding: utf-8
 
 from Products.Five.browser import BrowserView
-
-
-class FacetedTableView(BrowserView):
-
-    def render_table(self, batch):
-        table = FacetedTable(self.context, self.request)
-        table.update(batch)
-        return table.render()
-
-
 from ZTUtils import make_query
 from five import grok
+from imio.facetednavigation.interfaces import IFacetedTable
 from z3c.table import column
 from z3c.table.header import SortingColumnHeader
 from z3c.table.interfaces import IColumn
@@ -23,8 +14,12 @@ from zope.interface import implements
 from zope.publisher.interfaces.browser import IBrowserRequest
 
 
-class IFacetedTable(Interface):
-    pass
+class FacetedTableView(BrowserView):
+
+    def render_table(self, batch):
+        table = FacetedTable(self.context, self.request)
+        table.update(batch)
+        return table.render()
 
 
 class FacetedTable(SequenceTable):

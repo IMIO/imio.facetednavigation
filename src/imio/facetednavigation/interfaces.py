@@ -8,6 +8,10 @@ class ICollectionFacetApplied(IFacetedNavigable):
     pass
 
 
+class IFacetedTable(Interface):
+    pass
+
+
 class IWidgetDefaultValue(Interface):
     pass
 
