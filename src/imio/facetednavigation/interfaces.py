@@ -14,3 +14,7 @@ class IWidgetDefaultValue(Interface):
 
 class IFacetedCollectionAdvancedFilter(Interface):
     pass
+
+
+class IFacetedCollectionCategories(Interface):
+    pass

@@ -1,7 +1,9 @@
 # encoding: utf-8
 
 from Products.CMFPlone.utils import safe_unicode
+from imio.facetednavigation.interfaces import IFacetedCollectionCategories
 from plone import api
+from zope.component import getAdapter
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
@@ -45,10 +47,8 @@ class FacetedCollectionCategoryVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context, query=None):
-        items = [
-            SimpleTerm('category1', 'category1', 'Category 1'),
-            SimpleTerm('category2', 'category2', 'Category 2'),
-        ]
+        adapter = getAdapter(context, IFacetedCollectionCategories)
+        items = [SimpleTerm(key, key, value) for key, value in adapter.values]
         return SimpleVocabulary(items)
 
 

@@ -1,6 +1,8 @@
 # encoding: utf-8
 
+from imio.facetednavigation import ImioFacetedMessageFactory as _
 from imio.facetednavigation.interfaces import IFacetedCollectionAdvancedFilter
+from imio.facetednavigation.interfaces import IFacetedCollectionCategories
 from imio.facetednavigation.interfaces import IWidgetDefaultValue
 from five import grok
 from zope.interface import Interface
@@ -31,3 +33,19 @@ class AdvancedFilterAdapter(grok.Adapter):
     @property
     def query(self):
         return {'SearchableText': {'query': u'1'}}
+
+
+class CategoriesAdapter(grok.Adapter):
+    grok.provides(IFacetedCollectionCategories)
+    grok.context(Interface)
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def values(self):
+        return (
+            (u'category1', _(u'Category 1')),
+            (u'category2', _(u'Category 2')),
+            (u'category3', _(u'Category 3')),
+        )
