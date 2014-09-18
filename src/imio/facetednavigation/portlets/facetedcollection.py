@@ -30,6 +30,8 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
 
+    widget_types = ('facetedcollection-radio', 'facetedcollection-link')
+
     def render(self):
         return ViewPageTemplateFile('templates/portlet_facetedcollection.pt')(self)
 
@@ -38,15 +40,11 @@ class Renderer(base.Renderer):
         return ICollectionFacetApplied.providedBy(self.context)
 
     @property
-    def collections(self):
-        pass
-
-    @property
     def widget_render(self):
         criteria = ICriteria(self.context)
         widgets = []
         for criterion in criteria.values():
-            if criterion.widget not in ('facetedcollection-radio', ):
+            if criterion.widget not in self.widget_types:
                 continue
             widget_cls = criteria.widget(wid=criterion.widget)
             widgets.append(widget_cls(self.context, self.request, criterion))

@@ -2,7 +2,6 @@
 
 from Products.CMFCore.utils import getToolByName
 from collections import OrderedDict
-from eea.facetednavigation.widgets.widget import CountableWidget
 from imio.facetednavigation.interfaces import IWidgetDefaultValue
 from plone.app.querystring import queryparser
 from zope.component import getUtility
