@@ -41,6 +41,8 @@ setup(
         'eea.facetednavigation',
         'five.grok',
         'plone.api',
+        'plone.app.collection',
+        'plone.app.querystring',
         'setuptools',
         'z3c.table',
     ],

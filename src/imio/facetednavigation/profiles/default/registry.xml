@@ -1,0 +1,24 @@
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="imio.facetednavigation">
+
+    <records interface="plone.app.querystring.interfaces.IQueryOperation"
+             prefix="plone.app.querystring.operation.filter.is">
+        <value key="title" i18n:translate="">Is</value>
+        <value key="description" i18n:translate=""></value>
+        <value key="operation">imio.facetednavigation.queryparser._filter_is</value>
+        <value key="widget">StringWidget</value>
+    </records>
+
+    <records interface="plone.app.querystring.interfaces.IQueryField"
+             prefix="plone.app.querystring.field.AdvancedFilter">
+        <value key="title" i18n:translate="">Advanced filter</value>
+        <value key="description" i18n:translate="">Named of the adapter that provide advanced filters</value>
+        <value key="enabled">True</value>
+        <value key="sortable">False</value>
+        <value key="operations">
+            <element>plone.app.querystring.operation.filter.is</element>
+        </value>
+       <value key="group" i18n:translate="">Other</value>
+    </records>
+
+</registry>

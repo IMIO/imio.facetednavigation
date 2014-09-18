@@ -10,3 +10,7 @@ class ICollectionFacetApplied(IFacetedNavigable):
 
 class IWidgetDefaultValue(Interface):
     pass
+
+
+class IFacetedCollectionAdvancedFilter(Interface):
+    pass
