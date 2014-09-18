@@ -2,8 +2,7 @@
 
 from Products.CMFCore.utils import getToolByName
 from collections import OrderedDict
-from eea.facetednavigation.widgets import ViewPageTemplateFile
-from eea.facetednavigation.widgets.radio.widget import Widget as RadioWidget
+from eea.facetednavigation.widgets.widget import CountableWidget
 from imio.facetednavigation.interfaces import IWidgetDefaultValue
 from plone.app.querystring import queryparser
 from zope.component import getUtility
@@ -11,18 +10,12 @@ from zope.component import queryMultiAdapter
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class Widget(RadioWidget):
-
-    widget_type = 'facetedcollection'
-    widget_label = 'FacetedCollection'
-    category_vocabulary = 'imio.facetednavigation.facetedcollectioncategoryvocabulary'
-
-    index = ViewPageTemplateFile('widget.pt')
+class FacetedCollectionBaseWidget(object):
 
     def __call__(self, **kwargs):
         self.categories = self._get_categories()
         self.grouped_vocabulary = self._generate_vocabulary()
-        return super(Widget, self).__call__(**kwargs)
+        return super(FacetedCollectionBaseWidget, self).__call__(**kwargs)
 
     def query(self, form):
         """ Get value from form and return a catalog dict query """
@@ -55,7 +48,7 @@ class Widget(RadioWidget):
     @property
     def default(self):
         """Return the default value"""
-        default = super(Widget, self).default
+        default = super(FacetedCollectionBaseWidget, self).default
         if not default:
             default = self.adapter_default_value
         if not default and self.hidealloption is True:

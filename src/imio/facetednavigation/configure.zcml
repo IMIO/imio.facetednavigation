@@ -29,7 +29,7 @@
 
   <include package=".subtypes" />
   <include package=".portlets" />
-  <include package=".widgets.facetedcollection" />
+  <include package=".widgets.facetedcollectionradio" />
   <include package=".views" />
 
   <adapter factory=".criteria.CollectionCriteria"
