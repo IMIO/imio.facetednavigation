@@ -1,16 +1,28 @@
 # encoding: utf-8
 
 from Products.CMFCore.utils import getToolByName
+from collections import OrderedDict
+from eea.facetednavigation.widgets import ViewPageTemplateFile
 from eea.facetednavigation.widgets.radio.widget import Widget as RadioWidget
-from plone.app.querystring import queryparser
 from imio.facetednavigation.interfaces import IWidgetDefaultValue
+from plone.app.querystring import queryparser
+from zope.component import getUtility
 from zope.component import queryMultiAdapter
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class Widget(RadioWidget):
 
     widget_type = 'facetedcollection'
     widget_label = 'FacetedCollection'
+    category_vocabulary = 'imio.facetednavigation.facetedcollectioncategoryvocabulary'
+
+    index = ViewPageTemplateFile('widget.pt')
+
+    def __call__(self, **kwargs):
+        self.categories = self._get_categories()
+        self.grouped_vocabulary = self._generate_vocabulary()
+        return super(Widget, self).__call__(**kwargs)
 
     def query(self, form):
         """ Get value from form and return a catalog dict query """
@@ -71,3 +83,22 @@ class Widget(RadioWidget):
     @property
     def hidealloption(self):
         return bool(int(getattr(self.data, 'hidealloption', u'0') or u'0'))
+
+    def _get_categories(self):
+        factory = getUtility(IVocabularyFactory, self.category_vocabulary)
+        voc = factory(self.context)
+        return [(t.value, t.title) for t in voc]
+
+    def _generate_vocabulary(self):
+        voc = OrderedDict()
+        for key, value in self.categories:
+            voc[key] = []
+        for key, value in self.vocabulary():
+            voc[self._get_category(key)].append((key, value))
+        return voc
+
+    def _get_category(self, uid):
+        """Return the category for a given uid"""
+        catalog = getToolByName(self.context, 'portal_catalog')
+        brain = catalog(UID=uid)[0]
+        return brain.getObject().collectioncategory

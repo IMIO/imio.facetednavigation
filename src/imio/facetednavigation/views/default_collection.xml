@@ -31,7 +31,7 @@
    <property
       name="vocabulary">imio.facetednavigation.facetedcollectionvocabulary</property>
    <property name="catalog"></property>
-   <property name="maxitems">5</property>
+   <property name="maxitems">50</property>
    <property name="sortreversed">1</property>
    <property name="count">1</property>
    <property name="hidezerocount">0</property>
