@@ -11,6 +11,7 @@
   <include package="eea.facetednavigation" file="meta.zcml" />
   <include package="eea.facetednavigation" />
   <include package="five.grok" />
+  <grok:grok package=".adapter" />
 
   <genericsetup:registerProfile
       name="default"
